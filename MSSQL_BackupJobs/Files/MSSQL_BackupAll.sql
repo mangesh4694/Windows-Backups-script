@@ -1,0 +1,1 @@
+EXEC [usp_TakeALLDatabaseBackup] 'D:\MSSQL_Backups\'

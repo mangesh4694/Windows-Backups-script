@@ -1,0 +1,1 @@
+EXEC [usp_TakeALLDatabaseBackup] 'E:\Backups\MSSQL\SQL2019\'

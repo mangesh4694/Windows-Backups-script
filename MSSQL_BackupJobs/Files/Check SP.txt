@@ -1,0 +1,21 @@
+List SP,
+
+
+USE master;
+SELECT 
+  ROUTINE_SCHEMA,
+  ROUTINE_NAME
+FROM INFORMATION_SCHEMA.ROUTINES
+WHERE ROUTINE_TYPE = 'PROCEDURE';
+
+Check each SP using below name,
+
+USE master;  
+GO  
+EXEC sp_helptext N'usp_TakeALLDatabaseBackup'; 
+
+
+
+List txt content of SP
+
+sp_helptext [usp_BackupDatabases]

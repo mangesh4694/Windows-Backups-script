@@ -1,0 +1,1 @@
+xcopy /y E:\Backups\MSSQL\SQL2022\* "\\192.168.0.28\Server Backups\MSSQL\SQL2022" /E

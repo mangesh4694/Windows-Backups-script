@@ -1,18 +1,21 @@
-#Old script
-#Get-ChildItem -Recurse -Path "D:\MSSQL_Backups" | Where-Object { ! $_.PSIsContainer -and $_.LastWriteTime -lt (Get-Date).AddDays(-4)} | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
+<#
+.SYNOPSIS
+    Prunes backup archives older than 4 days.
+.NOTES
+    Author: Mangesh Mundhava
+    License: MIT
+#>
 
+$ScriptDir = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
+$TargetDir = "E:\Backups\MSSQL"
+$CleanupScript = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "Cleanup-OldBackups.ps1"
 
-# Define the path of the folder where the files and folders are located
-$folderPath = "D:\MSSQL_Backups"
-
-# Get the files and folders in the folder that are older than 5 days
-$oldItems = Get-ChildItem $folderPath -Recurse | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-4) }
-
-# Loop through the old items and delete them
-foreach ($item in $oldItems) {
-    if ($item.PSIsContainer) {
-        Remove-Item $item.FullName -Recurse -Force
-    } else {
-        Remove-Item $item.FullName -Force
-    }
+if (Test-Path $CleanupScript) {
+    & $CleanupScript -Path $TargetDir -RetentionDays 4
+} else {
+    Write-Host "[INFO] Scanning for expired backups older than 4 days in $TargetDir..."
+    $cutoff = (Get-Date).AddDays(-4)
+    Get-ChildItem -Path $TargetDir -Recurse -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -lt $cutoff } |
+        Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 }

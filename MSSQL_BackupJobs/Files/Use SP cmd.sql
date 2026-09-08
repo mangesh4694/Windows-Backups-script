@@ -1,1 +1,0 @@
-sp_helptext [usp_TakeALLDatabaseBackup]

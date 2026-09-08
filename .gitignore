@@ -1,0 +1,45 @@
+# ==============================================================================
+# Windows Backup Scripts - Git Ignore
+# Author: Mangesh Mundhava
+# ==============================================================================
+
+# Database backup archives & dumps
+*.bak
+*.trn
+*.backup
+*.dump
+*.sql.gz
+*.sql.zip
+*.tar.gz
+*.7z
+
+# Log directories and files
+logs/
+*.log
+
+# Local environment & secret overrides
+config.local.bat
+.env
+.env.local
+*.secret
+*.key
+*.pem
+
+# Windows system & editor artifacts
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Visual Studio Code / IDE settings
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Temporary files
+*.tmp
+*~

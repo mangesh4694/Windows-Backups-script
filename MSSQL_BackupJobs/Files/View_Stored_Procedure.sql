@@ -1,7 +1,6 @@
 -- ==============================================================================
--- Script:      MSSQL_BackupAll.sql
--- Description: Executes full backup of all databases on the current SQL instance
---              into the specified backup directory.
+-- Script:      View_Stored_Procedure.sql
+-- Description: Displays the source definition of the backup stored procedure.
 -- Author:      Mangesh Mundhava
 -- License:     MIT
 -- ==============================================================================
@@ -9,5 +8,5 @@
 USE [master];
 GO
 
-EXEC [dbo].[usp_TakeAllDatabaseBackups] 'E:\Backups\MSSQL\';
+EXEC sp_helptext N'dbo.usp_TakeAllDatabaseBackups';
 GO

@@ -1,0 +1,60 @@
+-- ==============================================================================
+-- Template:    Restore_Multiple_Databases.sql.example
+-- Description: Example template for batch-restoring SQL Server databases with 
+--              relocation of data (.mdf) and transaction log (.ldf) files.
+-- Author:      Mangesh Mundhava
+-- License:     MIT
+-- ==============================================================================
+--
+-- INSTRUCTIONS:
+-- 1. To inspect logical file names inside a backup file, run:
+--    RESTORE FILELISTONLY FROM DISK = N'D:\Backups\MSSQL\SampleDB_backup.bak';
+--
+-- 2. Update the database names, source backup paths, and target DATA/LOG
+--    directories according to your SQL Server environment.
+--
+-- 3. Run on the target SQL Server instance using SQL Server Management Studio
+--    (SSMS) or sqlcmd utility.
+-- ==============================================================================
+
+USE [master];
+GO
+
+-- ------------------------------------------------------------------------------
+-- Example 1: Standard Application Database Restore
+-- ------------------------------------------------------------------------------
+RESTORE DATABASE [AppDB] 
+FROM DISK = N'D:\Backups\MSSQL\AppDB_backup.bak' 
+WITH FILE = 1,
+     MOVE N'AppDB_Data' TO N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AppDB.mdf',
+     MOVE N'AppDB_Log'  TO N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AppDB_log.ldf',
+     NOUNLOAD,
+     REPLACE,
+     STATS = 5;
+GO
+
+-- ------------------------------------------------------------------------------
+-- Example 2: Billing & Finance Database Restore
+-- ------------------------------------------------------------------------------
+RESTORE DATABASE [BillingDB] 
+FROM DISK = N'D:\Backups\MSSQL\BillingDB_backup.bak' 
+WITH FILE = 1,
+     MOVE N'BillingDB_Data' TO N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\BillingDB.mdf',
+     MOVE N'BillingDB_Log'  TO N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\BillingDB_log.ldf',
+     NOUNLOAD,
+     REPLACE,
+     STATS = 5;
+GO
+
+-- ------------------------------------------------------------------------------
+-- Example 3: Analytics / Reporting Database Restore
+-- ------------------------------------------------------------------------------
+RESTORE DATABASE [AnalyticsDB] 
+FROM DISK = N'D:\Backups\MSSQL\AnalyticsDB_backup.bak' 
+WITH FILE = 1,
+     MOVE N'AnalyticsDB_Data' TO N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AnalyticsDB.mdf',
+     MOVE N'AnalyticsDB_Log'  TO N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\AnalyticsDB_log.ldf',
+     NOUNLOAD,
+     REPLACE,
+     STATS = 5;
+GO
